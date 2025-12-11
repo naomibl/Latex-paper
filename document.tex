@@ -1,0 +1,248 @@
+\documentclass[10pt,twocolumn]{article}
+
+% use the oxycomps style file
+\usepackage{oxycomps}
+
+% usage: \fixme[comments describing issue]{text to be fixed}
+% define \fixme as not doing anything special
+\newcommand{\fixme}[2][]{#2}
+% overwrite it so it shows up as red
+\renewcommand{\fixme}[2][]{\textcolor{red}{#2}}
+% overwrite it again so related text shows as footnotes
+%\renewcommand{\fixme}[2][]{\textcolor{red}{#2\footnote{#1}}}
+
+% read references.bib for the bibtex data
+\bibliography{compsreferences.bib}
+
+% include metadata in the generated pdf file
+\pdfinfo{
+    /Title (The Ants: Evoking Emotion Through Interactive Digital Storytelling)
+    /Author (Naomi Bahn-Logan)
+}
+
+% set the title and author information
+\title{The Ants: Evoking Emotion Through Interactive Digital Storytelling}
+\author{Naomi Bahn-Logan}
+\affiliation{Occidental College}
+\email{bahnlogan@oxy.edu}
+
+\begin{document}
+
+\maketitle
+
+\section{Abstract}
+This paper explores the design process and evaluation of The Ants, a digital, interactive adaptation of \textit{Leiningen Versus the Ants}, written by Carl Stephenson, which is designed to investigate how interactivity can heighten fear, tension, and unease. Drawing on research in horror media and interactive storytelling, \textit{The Ants} uses scroll-triggered animations, layered visual textures, and a climactic mini-game to create an immersive, participatory experience. Through an iterative design process, user testing was conducted to refine interactions, pacing, and visual cues, and to collect data on the project’s effectiveness in eliciting horror-related emotions. Participants reported feelings of fear, discomfort, and tension, with particularly strong responses during moments of perceived agency followed by loss of control, demonstrating that interactive design can amplify emotional engagement beyond traditional, passive media forms.
+
+
+\section{Introduction \& Problem Context} 
+
+Horror is one of the most enduring genres across film, literature, and interactive media, and its cultural influence continues to grow. Humans are naturally drawn to the mysterious and unexplainable; horror gives shape to these fascinations by creating controlled encounters with fear. More than simple entertainment, horror functions as a social and psychological space where people test emotional boundaries and explore aspects of the human condition that are otherwise difficult to confront. Emotional experiences in media can be powerful tools for self-understanding, revealing how we react under pressure, what unsettles us, and what draws us in despite, or even because of, discomfort.
+
+Research in media psychology shows that fictional horror can elicit genuine physiological reactions — increased heart rate, heightened alertness, muscle tension, and changes in skin conductance — responses similar to those produced by actual threats \cite{martin_why_2019}. The genre’s effectiveness stems from its distinctive tension-and-release structure: suspense gradually intensifies, fear reaches a peak, and then relief provides emotional resolution. This cycle can transform fear into excitement, creating a sense of catharsis that many audiences find compelling. Horror also offers a controlled space to confront unsettling or uncomfortable topics such as death or violence. By allowing these encounters to occur without real-world danger, the genre becomes more than entertainment — it becomes a platform for exploring emotions, understanding human psychology, and experiencing intense feelings within a safe environment.
+
+To situate this work, I draw briefly on phenomenology, which focuses on lived experience and how people perceive and act within the world. In interaction design, phenomenology emphasizes that interfaces don’t just display information — they shape how users feel, sense, and move through an experience.\cite{gloss_new_2024} Embodiment is especially relevant for interactive storytelling: scrolling, clicking, or hesitating becomes part of the narrative, directly affecting pacing and emotional tension. Because we understand the world through our bodies, sensory elements such as sound, visual rhythm, and motion can intensify emotional responses. In horror, where fear is both psychological and physical, these embodied interactions become especially potent.
+
+The cultural role of horror has expanded alongside technology as well. Contemporary horror media increasingly blends audiovisual design, narrative experimentation, and psychological insight to craft immersive experiences that engage audiences on multiple sensory levels. For example, films like \textit{Hereditary} (2018) \cite{aster_hereditary_2018} use precise sound design—subtle ambient noise, sudden silence, and dissonant music—to heighten tension and unease, while games like \textit{Resident Evil Village} (2021) \cite{sato_resident_2021} employ detailed 3D environments, dynamic lighting, and adaptive enemy behavior to make players feel physically and emotionally vulnerable. Interactive horror experiences such as VR titles \textit{Phasmophobia} (2020) \cite{knight_phasmophobia_2020} and \textit{The Exorcist: Legion VR} (2021) \cite{bousfield_exorcist_2017} push this further, leveraging presence, motion, and real-time player decision-making to generate personalized fear responses. With the rise of these immersive platforms, the boundaries of what horror can evoke, and how, are rapidly shifting.
+
+Interactive platforms, in particular, transform horror from a passive observation into an enacted experience. In these contexts, the user’s actions help generate fear: scrolling forward might trigger a reveal, lingering in a space can heighten suspense, and each gesture contributes to anticipation. Research on interactive and cross-media storytelling shows that this sense of agency deepens immersion, strengthens emotional engagement, and enhances memory retention. At the same time, these formats invite new creative approaches and raise questions about accessibility, ethics, and how to effectively measure engagement \cite{handaru_transformative_2025}. Understanding this broader technological and cultural context is essential for designing emotionally effective horror experiences that fully leverage interactivity and sensory design.
+
+Within this broader context, my project, \textit{The Ants}, explores how interactive design can intensify emotional engagement in horror through visual and auditory immersion, controlled agency, and adaptive pacing. I was drawn to this project because I first read \textit{Leiningen vs. the Ants} as a child, and the story left a lasting impression. I had a very intense fear of bugs, which stayed with me. Returning to that childhood fear became an opportunity to explore how interactive design can transform a personal anxiety into a shared, participatory emotional experience. By combining phenomenological principles with the psychological mechanics of horror, the project investigates how far an interface can push fear by making the user physically and emotionally complicit in the unfolding story.
+
+\begin{figure}
+   \centering
+ \includegraphics[width=.95\linewidth]{images/theants.png}
+    \caption{
+        The first page of \textit{The Ants}.
+    }
+    \label{fig:one}
+\end{figure}
+
+\section{Prior Work}
+
+\subsection{Branching Storyline}
+Research on interactive storytelling comprises a variety of formats, each offering different ways for users to engage with narrative content. One of the most well-established forms is the branching narrative, in which users make explicit choices that determine diverging story paths. This structure emphasizes agency by giving readers or players the sense that their decisions directly shape the story’s direction, tone, and consequences. Branching paths can heighten emotional investment, especially when choices carry weight, such as moral dilemmas or irreversible outcomes, as users feel personally responsible for what unfolds. However, because it relies on discrete, author-defined decision points, the emotional experience can become overly mechanical or “gamified”, with users focusing more on selecting options than immersing themselves in the narrative flow. Early hypertext fiction pioneered this format, while contemporary examples such as The Walking Dead (\cite{herman_walking_2012}) and Black Mirror: Bandersnatch (\cite{slade_black_2018}) demonstrate how branching paths can shape both plot and player investment, heightening tension by linking user decisions directly to narrative outcomes.
+
+\subsection{Exploratory Format}
+Another influential model in interactive storytelling is the exploratory or navigational format, where users move through a narrative environment by scrolling, clicking, or spatially traversing interconnected scenes. Rather than choosing between discrete options, users guide their own pacing and order of exploration, experiencing the story as a landscape rather than a sequence of decision points.
+
+A strong example of this approach is E. M. Carroll’s \textit{The Worthington} \cite{noauthor_worthington_nodate}, a web-comic designed as a horror “hotel”. Readers select from multiple doors, each leading to a different vignette, but the overarching structure remains fixed. The order in which rooms are visited changes the emotional texture of the experience. Anticipation and curiosity become part of the narrative itself - even though the story’s outcome does not change. This highlights an important strength of exploratory formats: they evoke agency not through altering the story but through controlling how, or in what order the story is encountered. The freedom to navigate encourages users to project their own expectations and fears onto the narrative space.
+
+However, this model also introduces design challenges. Because users control their traversal, maintaining consistent pacing and emotional escalation is more difficult than in linear frameworks. Designers must account for multiple potential reading orders and ensure that narrative coherence, tension, and atmosphere remain intact regardless of how users choose to explore. Without careful balance, exploratory environments can seem either too sparse, lacking emotional build-up, or too dense, risking cognitive overload.
+
+\subsection{Linear \& Scroll-Based Interaction}
+This project draws particular inspiration from \textit{The Boat}, adapted by Matt Huynh and SBS Australia \cite{sbs_boat_nodate}, an interactive graphic novel that tells the story of a Vietnamese family’s escape by boat after the Vietnam War. Unlike exploratory or choice-based interactive narratives, \textit{The Boat} follows a strictly linear storyline with no branching paths or user-driven deviations. Its interactivity lies in the mode of presentation: readers progress by scrolling vertically, revealing hand-drawn panels, atmospheric audio, and layered parallax effects that deepen immersion. This format is particularly effective at maintaining a seamless, uninterrupted flow, with pacing that unfolds naturally in response to the reader’s actions. However, this same strength can also present challenges. Since the story progresses through constant motion, it can be difficult to control the exact pacing of the emotional parts, and the density of visuals and audio can sometimes overwhelm users if also not carefully balanced. While \textit{The Boat} does not aim to evoke particularly horrific emotions, I drew inspiration from its vertical scrolling exploration and the way sequences of images allow the story to unfold naturally.
+
+Together, these formats demonstrate the range of strategies available in interactive storytelling and provide insight into how interactivity can shape emotional responses and narrative experience. Each model offers distinct strengths and challenges related to pacing, user agency, emotional engagement, and narrative coherence. Understanding these models of interactivity helped shape the design of \textit{The Ants}, which remains linear and scroll-based but borrows select mechanics and stylistic cues from branching and exploratory storytelling.
+
+\section{Methodology}
+This section explores the design and development process of The Ants through its different iterations.
+
+\subsection{Conceptual Approach}
+
+In the beginning stages of this project, I was first forced to understand exactly what it is about user interactivity that can make a story more emotion-evoking than traditional media forms such as movies, television, or even mainstream video games. As seen in Figure 2, I created a mind map outlining the specific emotions I aimed to evoke in users. According to "Cinematic emotion in horror films and thrillers: The aesthetic paradox of pleasurable fear" by Julian Hanich, horror cinema and literature rely on well-established techniques such as jump scares, suspenseful pacing, unsettling sound design, body horror, uncanny visual imagery, and narrative misdirection to elicit fear \cite{hanich_cinematic_2011}. I planned to incorporate these tactics into my project as well. These methods work because they exploit universal psychological mechanisms: startle reflexes, cognitive anticipation, and the brain’s tendency to fill in perceptual gaps when confronted with ambiguity. \cite{hanich_cinematic_2011} People have distinct psychophysiological responses to horror media because fear activates multiple systems at once. The amygdala initiates a threat response, elevating heart rate and triggering the release of adrenaline and cortisol. At the same time, sensory cues, such as low-frequency sound, dim lighting, or distorted motion, tap into evolutionarily ancient survival circuits designed to detect predators or environmental anomalies. \cite{nummenmaa_psychology_2021}. %Traditional horror media manipulates these mechanisms effectively, however the viewer remains fundamentally passive. The pace is controlled for them, the perspective is fixed, and the timing of fear stimuli is predetermined.
+
+What makes interactive storytelling uniquely powerful is that it alters these conditions. When a user must participate, by choosing where to click, when to move, or whether to proceed, they become an active agent in the emergence of fear. Interactivity introduces uncertainty, a sense of responsibility, and the possibility of personal failure, all of which intensify emotional engagement. Research in cognitive science and game studies suggests that agency amplifies both immersion and affective response: when people believe that their actions have direct consequences within a narrative system, their physiological arousal increases, as does their emotional investment. Even small interactive gestures can heighten tension by distributing control between the system and the user in unpredictable ways. I wanted to explore how far these mechanisms could be pushed. By building a story where each interaction carries perceptual or narrative weight, my goal was to see whether subtle environmental cues, micro-animations, or reactive sound design could produce fear not through cinematic spectacle, but through participatory vulnerability - the feeling that the story is not just happening to a character, but unfolding through the user's actions. This became the conceptual backbone of the piece: to investigate how interactive design can transform a familiar universal fear into something felt more viscerally and personally grounded in how we process threat. 
+
+\begin{figure}
+   \centering
+ \includegraphics[width=.95\linewidth]{images/flowchart.png}
+    \caption{
+        Mindmap of intended emotions to evoke.
+    }
+    \label{fig:two}
+\end{figure}
+
+\subsection{Narrative \& Visual Design Process}
+The adaptation began with a selective reconstruction of the original text, emphasizing scenes where the story’s sense of dread, grotesque imagery, and slow-building tension is most pronounced. Rather than reproducing the entire narrative beat-for-beat, I focused on moments where anticipation could be elongated and where the user’s forward motion, literally through scrolling, could mirror the protagonist’s psychological descent. "Why do you like Scary Movies? A Review of the Empirical Research on Psychological Responses to Horror Films" suggests that viewers experience the most intense emotional reactions when tension builds while full visual information is withheld, meaning fear peaks when something is imminent but not yet fully visible or understood \cite{martin_why_2019}.
+
+The visual language of the piece was deliberately developed using hand-drawn illustrations to achieve a textured, raw, and uncanny quality that resists the “smoothness” typically associated with digital imagery. This approach allowed me to create a more tactile and immediate aesthetic, reinforcing the unsettling atmosphere of the narrative. By emphasizing imperfections, irregular lines, and organic forms, the hand-drawn style contributes to a sense of intimacy and presence, making the user feel more embedded in the environment. This choice supports the interactive horror elements by encouraging closer inspection and creating a visual experience that feels more immediate and personal.
+
+\subsection{Scroll-Triggered Animations}
+A central challenge in adapting \textit{The Ants} into an interactive format was determining how motion itself could function as a narrative device. Instead of solely relying on static illustrations, the project uses scroll-triggered animations to create a sense of incremental encroachment - an approach supported by research in human-computer interaction, which shows that user-controlled motion increases both attentional focus and emotional sensitivity to visual changes \cite{handaru_transformative_2025}. As seen in Figure 3, I sketched a first draft of the long, continuous page to plan how the narrative and environmental effects would unfold continuously. I structured the piece as a single, vertically scrollable page so that motion could progress without interruption. Since several visual elements, such as the ant trails, parallax layers, and textured backgrounds, extend down the full length of the piece, the continuous scroll became essential for maintaining cohesion and preserving the feeling that the infestation grows progressively with each downward movement. In this system, every scroll gesture becomes a temporal mechanism: advancing the narrative, revealing new imagery, and subtly altering the environment.
+
+\begin{figure}
+   \centering
+ \includegraphics[width=.45\linewidth]{images/draft.png}
+    \caption{
+        First draft of scrollable page.
+    }
+    \label{fig:three}
+\end{figure}
+
+This design takes cues from cinematic suspense techniques without attempting to replicate them directly, instead translating their psychological effects into code‑driven behaviors. Partial reveals respond to the user’s pace rather than following a fixed timeline, parallax layers move at varying speeds to create spatial disorientation, such as ants beginning to crawl only after a scroll threshold is reached, give the environment a sense of latent life. In “A Sense of Fear and Anxiety in Digital Games: An Analysis of Cognitive Stimuli in Slender - The Eight Pages”, Dudek notes that staggered, user‑activated visual cues increase cognitive load and can foster anticipation, a well-established mechanism for generating unease \cite{dudek_sense_2021}. Embedding these cues in a continuous scrolling environment transforms the experience from discrete page-turning into a gradual descent, allowing dread to build organically as the user progresses.
+
+\subsection{Perceived Agency \& The Illusion of Control}
+While the scroll-triggered animations manipulate the temporal pacing, the project’s central impact comes from its manipulation of agency and the psychological tension that arises when control is distorted. Research across cognitive science and game studies consistently shows that fear is intensified when individuals believe their actions shape an outcome, even when the system is deliberately structured to undermine that belief. This phenomenon, known as the illusion of control, was first identified by Langer \cite{langer_illusion_nodate} and is later echoed in interactive narrative theory by Juul \cite{juul_half-real_2005}, both who discuss how systems can appear responsive while subtly constraining or destabilizing player influence.
+
+
+\begin{figure}
+   \centering
+ \includegraphics[width=.95\linewidth]{images/minigame.png}
+    \caption{
+        Mini-game of ants crawling towards center
+    }
+    \label{fig:four}
+\end{figure}
+
+The mini-game (seen in Figure 4) was designed as the emotional peak of the interactive experience: a point where the user’s previously established sense of control becomes compromised. On the surface, the mechanics appear simple: the player must eliminate ants as they crawl onto the screen, preventing them from overwhelming the interface. At first, the system behaves predictably; ants appear at manageable intervals, and the user’s actions produce immediate, visible results. These early moments are intentionally reassuring, allowing players to form a mental model of success and to believe that the infestation can be contained through rapid responses. Gradually, however, the mini-game begins to undermine this stability. The spawn rate increases, the ants’ movement becomes less predictable, and small delays in responsiveness disrupt the user’s rhythm. These changes accumulate subtly at first, then with increasing intensity, until the player is confronted with an impossible cascade of movement that no amount of skill or effort can contain. By structuring interactions that move from a sense of capability to a sense of futility, the piece exploits the psychological tension between what the user believes they can do and what the system ultimately allows. This mismatch becomes a narrative tool, transforming the user’s sense of control into the very source of their anxiety.
+\subsection{Technical Background}
+The project was developed using a front-end web stack consisting of HTML, CSS, and JavaScript, with additional visual elements generated through p5.js to create dynamic backgrounds that could react subtly to user movement. Scroll-triggered logic was implemented through JavaScript event listeners that monitored vertical position in real time, activating timed animations, parallax shifts, and incremental swarm behaviors to synchronize emotional pacing with the user’s progression down a continuous page. Hand-drawn illustrations were scanned, digitized, and separated into layered assets, enabling depth effects and independent motion sequencing essential for the project’s immersive environment. JavaScript-controlled transitions allowed ant density and movement to scale responsively as the user scrolled. Because the experience relies heavily on smooth visual flow, performance optimization played a central role: image compression, asset pre-loading, batching DOM updates, and minimizing layout thrashing were all used to prevent lag or stuttering that could disrupt immersion. Collectively, these optimizations formed the front-end pipeline that upheld the project’s aesthetic goals.
+\section{Evaluation Metrics}
+To determine whether the project effectively delivers its intended emotional impact, evaluation focuses on users’ physical, emotional, and verbal reactions, with special attention to the specificity of the emotions they report. All sessions were recorded live, enabling detailed analysis of both verbal feedback and spontaneous nonverbal reactions. Combining verbal self-reports with observation of physiological and behavioral cues proves to provide a more reliable measure of emotional engagement in interactive systems \cite{calvo_affect_2010}. This multi-channel approach also helps distinguish genuine emotional responses from reactions influenced by social context, performance pressure, or user expectations. Although physiological metrics such as heart-rate monitoring could have provided additional quantitative insight, I ultimately decided not to use them; the available tools were too inconsistent and prone to noise to produce reliable data in a fast-paced, open testing environment.
+
+\subsection{Target Emotional Responses}
+The project aims to evoke a defined set of horror-related emotions: fear, anxiety, unease, tension, and discomfort. These emotions serve as primary indicators of success. When users spontaneously describe experiencing these feelings, without being prompted, the system is functioning as designed. The closer their responses align with this specific emotional palette, the stronger the confirmation that the narrative, imagery, and interactions are producing the intended psychological effects.
+
+\subsection{User Self-Reports (Verbal feedback)}
+Post-interaction feedback was collected through brief, semi-structured interviews conducted immediately after the experience. Participants were asked to reflect on their emotional responses and specific moments that provoked strong reactions. Questions included:
+
+\begin{itemize}
+    \item “How did you feel immediately after finishing the experience?”
+    \item “Did the story make sense?”
+    \item “What moments felt particularly intense or unsettling, if any?”
+    \item “What was going through your mind during the mini-game?”
+    \item “Is there anything else you would like to add?”
+\end{itemize}
+
+The live recordings allowed me to cross-reference verbal reports with observable behavior, improving the reliability of the qualitative assessment.
+
+\subsection{Behavioral Indicators (Nonverbal Feedback)}
+In addition to verbal reports, users often expressed emotional responses through involuntary physical behaviors, which provide another data point for evaluating the system’s effectiveness. Observable cues included sudden pauses during scrolling, rapid or erratic mouse movements during the mini-game, flinching, furrowed brows, audible gasps, or other visible signs of discomfort. These nonverbal cues are especially important because they often emerge before users can articulate their emotions, revealing genuine and immediate affective responses. These reactions were documented through live session recordings, which allowed for slow review and more precise identification of subtle moment-to-moment changes in user behavior. When these behaviors occur consistently across participants, they reinforce the conclusion that the interactive components are successfully eliciting tension and fear.
+
+\section{Results and Discussion}
+\subsection{Recognition of Interactive Elements}
+The evaluation indicated a general success in achieving the project’s primary goal of eliciting horror-related emotions. However, in the initial stages of user testing, it became clear that interactive scenes were not always instantly recognizable to participants. Several users hesitated or overlooked the interactive elements altogether, affecting the pace (users scrolled past interactive scenes) which affectively reduced the emotional impact. To address this, a small red “i” icon was added to the corner of interactive scenes, indicating both that the area required user input and specifying the type of interaction involved. This adjustment significantly improved clarity and ensured that emotional beats dependent on interaction, such as sudden motion, reactive visuals, or the build of activity, were experienced as intended.
+
+With this refinement in place, the combination of scroll-triggered animations, layered visuals, and the mini-game mechanics consistently produced immersive dread, demonstrating that interactive design can heighten emotional engagement beyond what is typical in passive media. The mini-game, in particular, produced the most intense reactions, supporting the methodological hypothesis that perceived agency followed by its sudden removal amplifies fear. As one participant noted, “I did not like how fast they started moving, it really stressed me out.” Others commented on the scroll-triggered visuals, describing them as “creepy”, “freaky”, or “like they were crawling all over me,” reinforcing the idea that gradual, user-dependent reveals mirror cinematic suspense strategies in an interactive form.
+
+However, several alternate explanations and limitations must also be acknowledged. First, some users may have been more reactive simply because they were being observed or recorded, a phenomenon consistent with social facilitation effects. Second, individual sensitivity to insects or swarm imagery may have influenced emotional intensity independent of the project’s mechanics. Finally, a few participants moved quickly through the piece, which reduced the effectiveness of the slow-build pacing; this suggests that user-driven timing can be both an asset and a limitation, depending on user behavior and attentional habits.
+
+Despite these complicating factors, the overall pattern of findings supports the project’s central goal: demonstrating that interactivity can increase emotional involvement in horror narratives by distributing control between the user and the system. The methods, particularly the fast-paced required actions and deliberate removal of agency, directly contributed to the emotional outcomes observed.
+
+\section{Ethical Considerations}
+\subsection{Complexities of Emotional Design}
+Evoking emotions in interactive media is inherently challenging because emotional responses are highly subjective, culturally influenced, and difficult to predict. What provokes fear, unease, or tension for one participant may be neutral or even calming for another, depending on prior experiences, personal phobias, or cultural context. This variability complicates both the design and evaluation of emotional experiences: a single interaction cannot guarantee the intended response, and requires careful interpretation of diverse user reactions. Furthermore, interactive media introduces additional layers of unpredictability: user choices, timing, and navigation can all influence emotional impact, making it necessary for designers to anticipate multiple pathways and outcomes.
+
+\subsection{Responsible Use of Emotion in Storytelling}
+Emotions can be powerful narrative tools, but there is a fine line between meaningful emotional design and manipulative or sensational storytelling. Responsible use requires aligning emotional moments with thematic purpose and respecting the audience’s psychological boundaries. "Monsters and Post-traumatic Stress: An Experiential-Processing Model of Monster Imagery in Psychological Therapy, Film and Television" by Jenny Hamilton explores how exposure to horror‑related imagery can interface with real psychological trauma; when horror elements depict trauma, violence, or existential threat, they may trigger real emotional distress in some viewers, rather than providing safe “entertainment”. \cite{hamilton_monsters_2020} While my project’s use of tension, dread, and loss of control is intended to serve a narrative and conceptual purpose, to investigate how interactivity transforms horror, there’s a risk that these emotional beats might be experienced as manipulative or even harmful, particularly for users with trauma histories or heightened sensitivity. 
+
+Interactive media complicates traditional ethical concerns around emotional manipulation because users actively participate in triggering the emotional content. Moments such as rapid decision-making, limited control, or sudden loss of agency can create extremely intense reactions. While this can be artistically meaningful, it risks crossing into coercion if the user feels trapped, overwhelmed, or misled. Fogg notes that persuasive technologies must clearly communicate their intentions to maintain user trust and autonomy \cite{fogg_ethics_2003}. In this project, some scenes include sudden shocks or mild jump scares without prior warning. Because these moments intentionally disrupt user expectations and remove their ability to anticipate or prepare for the emotional impact, they risk crossing the line into ethically questionable design. 
+
+\begin{figure}
+   \centering
+ \includegraphics[width=.95\linewidth]{images/intro.png}
+    \caption{
+       Instruction page before \textit{The Ants} begins.
+    }
+    \label{fig:five}
+\end{figure}
+
+\subsection{Accessibility and Structural Inequities}
+Interactive emotional experiences can unintentionally exclude or disadvantage certain users. Rapid-input mechanics may be physically challenging; intense visuals or unpredictable motion can affect users with sensory sensitivities; and fear-based content may disproportionately impact individuals with trauma histories. Notably, this project includes flashing lights as part of the mini-game and other visual sequences, which necessitates a trigger warning for users susceptible to photosensitive seizures or sensory overstimulation. Costanza-Chock (2020) highlights how design choices often reflect unexamined assumptions about “default” users, thereby reinforcing structural inequities \cite{costanza-chock_design_2020}. To mitigate these concerns, the project includes a warning on the introductory page alerting users to the presence of flashing lights and other potentially intense visual elements (Figure 5). This serves as a trigger warning and advises users to proceed with caution, ensuring they are informed and can make a choice about engaging with the experience.
+
+
+
+\section{Conclusion}
+\textit{The Ants} is a digital, interactive adaptation of the narrative \textit{Leiningen Versus The Ants}, designed to explore how user interactivity can intensify fear, tension, and discomfort. Participants responded strongly to the combination of hand-drawn illustrations, adapted text from the story, scroll-triggered animations, layered visuals, and the mini-game that manipulates perceived agency, demonstrating that interactivity can heighten emotional engagement beyond traditional passive media. Based on feedback, future development could expand the project by adding additional scenes, increasing environmental responsiveness to user actions, or introducing new interactive mechanics, allowing for a deeper exploration of horror and more varied user experiences.
+
+\printbibliography
+
+
+\appendix
+\section{Replication Instructions}
+This project was built using JavaScript and HTML/CSS, with p5.js. To run the project, download or clone the GitHub repository where you found this paper. To open the project in a browser, navigate to the folder containing \texttt{begin.html} and open the file in Chrome. All assets, including images and audio, are included in the /assets folder.
+
+\section{Code Architecture}
+The project is organized into a modular code structure designed to keep visual assets, interaction logic, and layout elements clearly separated. The root directory contains two primary HTML files, \texttt{begin.html} and \texttt{intro.html}. \texttt{begin.html} functions as the project’s entry point, giving the user instructions on how to use the project and warnings. \texttt{intro.html} transitions into the interactive scrolling sequence, loading all animations, event listeners, and visual elements used throughout the main experience.
+
+All JavaScript used to control interactivity, animations, and scroll-based behavior is stored in the \texttt{js/} folder by scene. This folder includes scripts responsible for triggering animations on scroll and updating the environment as users progress vertically. Separating these scripts from the HTML files ensures cleaner organization and makes it easier to adjust specific behaviors, such as parallax effects, without disrupting the structural markup.
+
+Styling is handled within the \texttt{css/} folder, which contains the project’s global stylesheet as well as additional files for handling typography, color palette, layout spacing, and transitions. Housing the CSS separately allows the visual design system to be modified independently of the narrative or interaction logic.
+
+All visual and audio assets are stored in the \texttt{assets/} directory. This includes illustrations, ant images,  sound files, and background videos. By grouping all media elements in one location, the system remains easy to maintain, and file paths can be updated or reorganized without affecting the project's foundational code structure.
+
+
+\begin{verbatim}
+project-root/
+|-- begin.html
+|-- intro.html
+|-- js/
+|   |-- army.js
+|   |-- bg.js
+|   |-- danger.js
+|   |-- face.js
+|   |-- farm.js
+|   |-- frames.js
+|   |-- i.js
+|   |-- intro.js
+|   |-- lines.js
+|   |-- minigame.js
+|   |-- parallax.js
+|   |-- typewriter.js
+|   |-- upclose.js
+|   `-- walk.js
+|-- css/
+|   |-- army.css
+|   |-- base.css
+|   |-- closeup.css
+|   |-- danger.js
+|   |-- face.js
+|   |-- farms.js
+|   |-- frames.js
+|   |-- i.js
+|   |-- intro.js
+|   |-- lookup.js
+|   |-- stand.js
+|   `-- walking.js
+`-- assets/
+    |-- images/
+    |-- videos/
+    |-- drawings/
+    `-- audio/
+\end{verbatim}
+\appendix
+
+\section{Paper Rubric}
+
+
+\end{document}
